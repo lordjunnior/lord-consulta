@@ -1,0 +1,46 @@
+import { beforeAll, describe, expect, test } from 'vitest';
+
+import axios from 'axios';
+
+import {
+  validResponseV1,
+  validResponseAllDDDV1,
+  invalidResponseInvalid,
+} from './helpers/ddd';
+
+let requestUrl = '';
+
+describe('api/ddd/v1 (E2E)', () => {
+  beforeAll(async () => {
+    requestUrl = `${global.SERVER_URL}/api/ddd/v1`;
+  });
+
+  test('Obtendo todos os DDD válidos', async () => {
+    const response = await axios.get(`${requestUrl}`);
+    const { data, status } = response;
+
+    expect(status).toEqual(200);
+    const dddSP = data.filter((ddd) => ddd.state === 'SP');
+    expect(dddSP).toEqual(validResponseAllDDDV1);
+  });
+
+  test('Utilizando um DDD válido: 11', async () => {
+    const response = await axios.get(`${requestUrl}/11`);
+    const { data, status } = response;
+
+    expect(status).toEqual(200);
+    expect(data).toEqual(validResponseV1);
+  });
+
+  test('Utilizando um DDD inexistente: 01', async () => {
+    try {
+      await axios.get(`${requestUrl}/01`);
+    } catch (error) {
+      const { response } = error;
+      const { data, status } = response;
+
+      expect(status).toEqual(400);
+      expect(data).toEqual(invalidResponseInvalid);
+    }
+  });
+});

@@ -1,0 +1,109 @@
+{
+  "name": "brasilapi",
+  "version": "1.0.0",
+  "description": "Vamos transformar o Brasil em uma API?",
+  "engines": {
+    "npm": ">=10",
+    "node": "24.x"
+  },
+  "dependencies": {
+    "@djpfs/react-vlibras": "2.0.2",
+    "adm-zip": "^0.6.0",
+    "axios": "1.8.3",
+    "bluebird": "3.7.2",
+    "cep-promise": "4.4.1",
+    "core-js": "3.33.1",
+    "cors": "2.8.5",
+    "dayjs": "1.11.7",
+    "fast-xml-parser": "4.5.4",
+    "is-in-subnet": "4.0.1",
+    "joi": "17.8.3",
+    "lodash": "4.17.21",
+    "micro-cors": "0.1.1",
+    "mobx": "6.7.0",
+    "next": "^12.3.4",
+    "next-connect": "0.12.1",
+    "next-sitemap": "1.6.168",
+    "papaparse": "5.4.0",
+    "piscina": "3.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "4.7.1",
+    "redoc": "2.0.0",
+    "sass": "1.56.1",
+    "selic": "1.1.0",
+    "styled-components": "5.3.6",
+    "tz-lookup": "^6.1.25",
+    "vite": "6.2.2",
+    "wikijs": "6.4.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@vitest/coverage-istanbul": "3.0.8",
+    "@vitest/eslint-plugin": "1.1.37",
+    "async-retry": "1.3.3",
+    "commitizen": "4.2.5",
+    "concurrently": "8.2.2",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.57.1",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-next": "^14.1.0",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "github-contributors-list": "1.2.5",
+    "husky": "8.0.0",
+    "kill-port": "1.6.1",
+    "lint-staged": "13.0.4",
+    "pdfjs-dist": "^6.2.108",
+    "prettier": "2.8.0",
+    "vitest": "3.0.8"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "preconcurrently": "kill-port 3000",
+    "concurrently": "concurrently -s first -P -k -n next,vitest \"npm run dev\" \"vitest {@}\"",
+    "test": "npm run concurrently -- --hide dev -- run",
+    "test:unit": "vitest --run",
+    "test:integration": "INTEGRATION=true npm test",
+    "test:watch": "vitest watch",
+    "test:watch:services": "npm run concurrently -- -- watch",
+    "fix": "eslint . --ext .js --fix",
+    "snapshot:banks": "node scripts/generate-bank-headquarters-snapshot.js",
+    "snapshot:pix:participants": "node scripts/generate-pix-participants-snapshot.js",
+    "commit": "cz",
+    "precommit": "lint-staged",
+    "gen:contributors": "githubcontrib --owner BrasilAPI --repo BrasilAPI --sortBy contributions --sortOrder desc --filter filipedeschamps,lucianopf,dependabot[bot] --layoutStrategy $INIT_CWD/.github/contributors-list/layout-strategy-custom.js",
+    "prepare": "husky install",
+    "snapshot:hospitais": "node scripts/generate-hospitais-snapshot.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "npm run fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrasilAPI/BrasilAPI.git"
+  },
+  "author": "Filipe Deschamps",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrasilAPI/BrasilAPI/issues"
+  },
+  "homepage": "https://github.com/BrasilAPI/BrasilAPI#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

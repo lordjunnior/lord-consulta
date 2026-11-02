@@ -1,0 +1,42 @@
+{
+    "tags": [
+        {
+            "name": "Feriados Estaduais",
+            "description": "Informações sobre feriados estaduais"
+        }
+    ],
+    "paths": {},
+    "components": {
+        "schemas": {
+            "statewideHolidays": {
+                "title": "statewideHolidays",
+                "type": "object",
+                "required": [
+                    "date",
+                    "type",
+                    "name"
+                ],
+                "properties": {
+                    "date": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "format": "int32"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "date": "2023-11-20",
+                    "name": "Dia da consciência Negra",
+                    "type": "state"
+                }
+            }
+        }
+    }
+}

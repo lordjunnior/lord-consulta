@@ -1,0 +1,69 @@
+import app from '@/app';
+import BadRequestError from '@/errors/BadRequestError';
+import NotFoundError from '@/errors/NotFoundError';
+import { fetchCep } from '@/services/cep/cep';
+import { normalizeServiceErrors } from '@/util/cep-error-handler';
+
+const tempBlockedIps = [];
+
+const pathToBlock = '/api/cep/v1/52';
+
+const tempBlockedUserAgents = ['Go-http-client/2.0'];
+
+async function Cep(request, response) {
+  const clientIp =
+    request.headers['x-forwarded-for'] || request.connection.remoteAddress;
+
+  if (
+    clientIp &&
+    tempBlockedUserAgents.includes(request.headers['user-agent']) &&
+    tempBlockedIps.includes(clientIp)
+  ) {
+    response.status(429);
+    return response.send(
+      'please stop abusing our public API, join our slack to chat a bit https://join.slack.com/t/brasilapi/shared_invite/zt-1k9w5h27p-4yLWoOQqIMgwqunnHCyWCQ'
+    );
+  }
+
+  if (
+    tempBlockedUserAgents.includes(request.headers['user-agent']) &&
+    request.url.includes(pathToBlock)
+  ) {
+    response.status(429);
+    return response.send(
+      'please stop abusing our public API, join our slack to chat a bit https://join.slack.com/t/brasilapi/shared_invite/zt-1k9w5h27p-4yLWoOQqIMgwqunnHCyWCQ'
+    );
+  }
+
+  try {
+    const requestedCep = request.query.cep;
+
+    const cepResult = await fetchCep(requestedCep);
+
+    response.status(200);
+    return response.json(cepResult);
+  } catch (error) {
+    if (error.name !== 'CepPromiseError') {
+      throw error;
+    }
+
+    if (error.type === 'validation_error') {
+      throw new BadRequestError(error);
+    }
+
+    if (error.type === 'service_error') {
+      // Normaliza mensagens técnicas dos providers (ex: "Cannot read
+      // properties of undefined") para mensagens padronizadas
+      if (error.errors) {
+        error.errors = normalizeServiceErrors(error.errors);
+      }
+      throw new NotFoundError(error);
+    }
+
+    if (error.type === 'bad_request') {
+      throw error;
+    }
+  }
+}
+
+export default app({ cache: 172800 }).get(Cep);
