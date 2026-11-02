@@ -1,244 +1,184 @@
-# Arquivos de Instruções e Automação
+# LORD CONSULTA
 
-Este diretório contém arquivos de configuração e instruções para auxiliar no desenvolvimento e revisão de código do BrasilAPI.
+### Dados brasileiros. Inteligência prática. Informação acessível.
 
-## 📚 Arquivos de Instrução
+Uma plataforma em desenvolvimento para centralizar, consultar e interpretar informações públicas brasileiras por meio de integrações com APIs e fontes de dados abertas.
 
-### 🤖 Para GitHub Copilot e Desenvolvedores
+O Lord Consulta nasce com uma proposta simples: tornar informações que normalmente estão espalhadas por diferentes serviços mais acessíveis, organizadas e úteis para as pessoas.
 
-#### [`copilot-instructions.md`](copilot-instructions.md)
-**Propósito:** Instruções gerais para desenvolvimento assistido por IA
-
-**Uso:**
-- Referenciado automaticamente pelo GitHub Copilot durante desenvolvimento
-- Guia para desenvolvedores entenderem padrões do projeto
-- Define princípios fundamentais: compatibilidade, documentação, custos, qualidade
-
-**Conteúdo:**
-- Visão geral e missão do projeto
-- Arquitetura e padrões de código
-- Workflow para criar endpoints
-- Exemplos de código e testes
-- FAQ e comandos úteis
-
-#### [`copilot-review-instructions.md`](copilot-review-instructions.md)
-**Propósito:** Instruções específicas para revisão automática de PRs pelo GitHub Copilot
-
-**Uso:**
-- Treina o Copilot para revisar PRs seguindo nossos padrões
-- Define critérios objetivos de aprovação/rejeição
-- Automatiza parte do processo de code review
-
-**Conteúdo:**
-- Regras não-negociáveis (breaking changes, documentação, testes, segurança)
-- Checklist obrigatória de revisão em 7 categorias
-- Templates de feedback específico para cada tipo de problema
-- Priorização: crítico vs importante vs sugestão
-- Casos especiais (doc-only, dependabot, refatoração)
-
-**Como funciona:**
-1. Desenvolvedor abre PR
-2. GitHub Copilot lê este arquivo
-3. Copilot analisa mudanças seguindo checklist
-4. Copilot comenta problemas encontrados com soluções específicas
-5. Copilot sugere aprovação ou solicita mudanças
-
-### 👥 Para Revisores Humanos
-
-#### [`CODE_REVIEW_GUIDELINES.md`](CODE_REVIEW_GUIDELINES.md)
-**Propósito:** Guia completo para revisores humanos
-
-**Uso:**
-- Consulta durante revisão manual de PRs
-- Treinamento de novos revisores
-- Referência para critérios de qualidade
-
-**Conteúdo:**
-- Checklist detalhada de revisão
-- Como verificar compatibilidade de API
-- Como validar documentação e testes
-- Como avaliar performance e custos
-- Como identificar vulnerabilidades
-- Como dar feedback efetivo
-- Red flags para rejeição imediata
-
-### 📝 Para Contribuidores
-
-#### [`PULL_REQUEST_TEMPLATE.md`](PULL_REQUEST_TEMPLATE.md)
-**Propósito:** Template automático para todos os PRs
-
-**Uso:**
-- Aplicado automaticamente ao abrir novo PR
-- Guia contribuidor no checklist antes de submeter
-- Garante que informações essenciais sejam fornecidas
-
-**Conteúdo:**
-- Checklists de compatibilidade, documentação, testes, código
-- Seção para descrever como testar
-- Instruções para revisores
-- Lembretes sobre impacto em produção
-
-## 🔄 Workflow de Contribuição
-
-```mermaid
-graph TD
-    A[Desenvolvedor inicia mudança] --> B[Consulta copilot-instructions.md]
-    B --> C[Implementa seguindo padrões]
-    C --> D[Executa testes localmente]
-    D --> E[Abre PR usando template]
-    E --> F{Copilot Review Automático}
-    F -->|Problemas| G[Desenvolvedor corrige]
-    G --> F
-    F -->|OK| H{Revisão Humana}
-    H -->|Segue CODE_REVIEW_GUIDELINES| I[Aprovação]
-    H -->|Problemas| J[Feedback detalhado]
-    J --> G
-    I --> K[Merge]
-```
-
-## 🎯 Diferença entre os Arquivos
-
-| Arquivo | Audiência | Momento | Foco |
-|---------|-----------|---------|------|
-| `copilot-instructions.md` | Copilot + Devs | Durante desenvolvimento | Como escrever código |
-| `copilot-review-instructions.md` | Copilot | Durante review automático | Como revisar código |
-| `CODE_REVIEW_GUIDELINES.md` | Revisores humanos | Durante review manual | Como revisar profundamente |
-| `PULL_REQUEST_TEMPLATE.md` | Contribuidor | Ao abrir PR | O que incluir no PR |
-
-## 🤖 Quais Arquivos São Usados Automaticamente?
-
-### ✅ Arquivos Automáticos (Nenhuma Configuração Necessária)
-
-#### 1. `PULL_REQUEST_TEMPLATE.md`
-- ✅ **Uso 100% automático**
-- Aplicado automaticamente quando qualquer pessoa abre um PR
-- Não requer nenhuma configuração
-- Funciona imediatamente após o merge
-
-#### 2. `copilot-instructions.md`
-- ✅ **Uso automático pelo GitHub Copilot**
-- GitHub Copilot no VS Code/IDE detecta e usa automaticamente
-- Aplicado durante desenvolvimento quando Copilot está ativo
-- Não requer configuração adicional no repositório
-- **Requisito**: Desenvolvedor precisa ter GitHub Copilot instalado no IDE
-
-### ⚙️ Arquivos que Requerem Ação Manual
-
-#### 3. `copilot-review-instructions.md`
-- ⚙️ **Uso via comando ou configuração**
-- **Opção A - Uso manual por mantenedores**: Comente no PR:
-  ```text
-  @copilot review
-  ```
-  Ou mencione o arquivo específico:
-  ```text
-  @copilot review following .github/copilot-review-instructions.md
-  ```
-- **Opção B - Configuração automática** (se disponível no plano):
-  - GitHub Copilot Enterprise pode ter configuração para revisão automática
-  - Verificar em Settings → Copilot do repositório
-- **Uso alternativo**: Mantenedores podem usar como checklist manual
-
-#### 4. `CODE_REVIEW_GUIDELINES.md`
-- 📖 **Documento de referência - uso manual**
-- Revisores humanos consultam durante review
-- Não é usado automaticamente por ferramentas
-- Serve como guia e treinamento
-
-#### 5. `README.md` (este arquivo)
-- 📖 **Documentação - uso manual**
-- Explicação sobre todos os outros arquivos
-- Consultado quando necessário
-
-## 🚀 Resumo: Configuração Necessária
-
-| Arquivo | Automático? | Ação Necessária |
-|---------|-------------|-----------------|
-| `PULL_REQUEST_TEMPLATE.md` | ✅ Sim | Nenhuma - já funciona |
-| `copilot-instructions.md` | ✅ Sim (com Copilot no IDE) | Nenhuma - desenvolvedores precisam ter Copilot |
-| `copilot-review-instructions.md` | ⚙️ Parcial | Mantenedores devem usar `@copilot review` nos PRs |
-| `CODE_REVIEW_GUIDELINES.md` | ❌ Não | Revisores consultam manualmente |
-| `README.md` | ❌ Não | Documentação de referência |
-
-## 💡 Recomendações de Uso
-
-### Para Começar Agora (Zero Configuração)
-1. **Template de PR**: Já funciona! Próximo PR terá o template automaticamente
-2. **Instruções de desenvolvimento**: Desenvolvedores com Copilot já recebem as instruções automaticamente
-
-### Para Aproveitar Revisão Automática
-**Mantenedores devem**, em cada PR importante:
-```text
-# Comentar no PR para pedir revisão do Copilot
-@copilot review
-```
-
-Isso fará o Copilot analisar o PR seguindo as regras em `copilot-review-instructions.md`
-
-### Para Revisão Manual
-Revisores humanos devem consultar `CODE_REVIEW_GUIDELINES.md` como guia detalhado
-
-## 🔧 Configuração Avançada (Opcional)
-
-Se sua organização tem **GitHub Copilot Enterprise**, você pode:
-1. Ir em **Settings** → **Copilot** (no nível da organização ou repositório)
-2. Procurar por opções de "Code Review" ou "PR Review"
-3. Configurar revisão automática para todos os PRs
-4. O Copilot usará `copilot-review-instructions.md` automaticamente
-
-> **Nota**: Esta funcionalidade pode não estar disponível em todos os planos. Consulte a [documentação do GitHub Copilot](https://docs.github.com/en/copilot) para detalhes.
-
-## 📖 Mantendo as Instruções
-
-### Quando Atualizar
-
-**`copilot-instructions.md`:**
-- Novos padrões de código são adotados
-- Mudanças em arquitetura
-- Novos comandos ou ferramentas
-- Lições aprendidas de erros comuns
-
-**`copilot-review-instructions.md`:**
-- Novos tipos de problemas frequentes em PRs
-- Mudanças em critérios de aprovação
-- Novos checks automatizados necessários
-- Feedback que deve ser padronizado
-
-**`CODE_REVIEW_GUIDELINES.md`:**
-- Processos de revisão evoluem
-- Novos requisitos de qualidade
-- Melhores práticas são descobertas
-
-**`PULL_REQUEST_TEMPLATE.md`:**
-- Informações faltando frequentemente em PRs
-- Novos checks necessários antes do merge
-
-### Como Atualizar
-
-1. Abra PR com mudanças nas instruções
-2. Explique motivo da mudança
-3. Se possível, referencie PRs que motivaram a mudança
-4. Peça feedback de outros mantenedores
-5. Merge após aprovação
-
-## 🎓 Filosofia do Projeto
-
-Todos esses arquivos refletem os princípios fundamentais do BrasilAPI:
-
-1. **🔒 Compatibilidade é sagrada**: Nunca quebre aplicações existentes
-2. **📝 Documentação é obrigatória**: Código sem doc não existe
-3. **💰 Custos devem ser zero**: Projeto deve ser sustentável sem financiamento
-4. **🔐 Segurança em primeiro lugar**: Proteção de dados e validação sempre
-5. **✅ Qualidade é mandatória**: Testes, linting, padrões são obrigatórios
-6. **🌍 Open-source e comunidade**: Decisões transparentes e colaborativas
-
-## 📞 Dúvidas?
-
-- Para dúvidas sobre desenvolvimento: Ver `copilot-instructions.md`
-- Para dúvidas sobre revisão: Ver `CODE_REVIEW_GUIDELINES.md`
-- Para dúvidas sobre contribuição: Ver `/CONTRIBUTING.md`
-- Para issues: [github.com/BrasilAPI/BrasilAPI/issues](https://github.com/BrasilAPI/BrasilAPI/issues)
+**Desenvolvido por [@lordjunnior](https://github.com/lordjunnior).**
 
 ---
 
-**Mantido pela comunidade BrasilAPI** 🇧🇷
+## VISÃO DO PROJETO
+
+Consultar uma informação não deveria exigir que o usuário conhecesse diferentes APIs, documentações técnicas ou estruturas de dados.
+
+O Lord Consulta parte dessa ideia para construir uma experiência unificada de acesso a informações brasileiras.
+
+A base técnica utiliza como referência a [BrasilAPI](https://github.com/BrasilAPI/BrasilAPI), iniciativa comunitária que centraliza endpoints de diferentes fontes de dados e disponibiliza interfaces modernas para integração entre sistemas.
+
+A proposta é evoluir essa base para uma experiência própria, com organização, apresentação e funcionalidades orientadas às necessidades reais dos usuários.
+
+## O QUE PRETENDEMOS CONSTRUIR
+
+### 01. Consultas brasileiras
+
+Centralização de consultas a informações públicas e serviços de dados.
+
+- CEP e informações de endereço.
+- CNPJ e dados cadastrais.
+- Instituições e códigos bancários.
+- DDD e localidades.
+- Feriados nacionais.
+- Informações de veículos e referências da tabela FIPE.
+
+A disponibilidade de cada consulta depende das integrações e das fontes utilizadas.
+
+### 02. Raio-X Empresarial
+
+Uma proposta de investigação empresarial baseada em informações públicas.
+
+O objetivo é reunir diferentes fontes para permitir a verificação de informações relacionadas a empresas brasileiras.
+
+Possíveis integrações:
+
+- Dados cadastrais empresariais.
+- Inscrições em dívida ativa.
+- Certidões de regularidade fiscal.
+- Recuperação judicial e falência.
+- Processos judiciais públicos.
+- Débitos trabalhistas consultáveis.
+- Protestos disponíveis em centrais públicas.
+
+O sistema deverá apresentar as fontes, datas de referência, documentos disponíveis e limitações de cada consulta.
+
+**Importante:** não existe uma base pública irrestrita que revele todas as dívidas de uma empresa. O projeto não pretende apresentar estimativas como valores oficiais nem transformar ausência de registros encontrados em garantia de regularidade.
+
+### 03. Inteligência sobre informações
+
+Além de apresentar resultados, a proposta é tornar os dados compreensíveis.
+
+- Organização de informações provenientes de diferentes fontes.
+- Identificação de divergências entre registros.
+- Explicação de termos e classificações técnicas.
+- Comparação de informações disponíveis.
+- Relatórios organizados com referências verificáveis.
+
+### 04. Relatórios e evidências
+
+Uma consulta deve permitir que o usuário compreenda de onde veio a informação.
+
+A evolução do projeto prevê:
+
+- Histórico de consultas, quando habilitado.
+- Identificação das fontes utilizadas.
+- Datas de consulta e referência dos dados.
+- Exportação de relatórios.
+- Organização de documentos e evidências.
+
+---
+
+## FUNDAMENTAÇÃO TÉCNICA
+
+O projeto utiliza como referência a arquitetura e a proposta da BrasilAPI.
+
+A iniciativa original foi criada para facilitar o acesso programático a informações públicas, disponibilizando endpoints modernos e utilizando infraestrutura de distribuição e cache para otimizar o acesso aos dados.
+
+Entre os conceitos técnicos presentes na base original estão:
+
+- APIs REST.
+- Integração com diferentes provedores de informação.
+- Documentação OpenAPI.
+- Estratégias de cache.
+- Distribuição de conteúdo por infraestrutura CDN.
+- Arquitetura preparada para implantação na Vercel.
+
+A documentação das integrações pode ser consultada em:
+
+- [BrasilAPI — Documentação](https://brasilapi.com.br/docs)
+- [BrasilAPI — GitHub](https://github.com/BrasilAPI/BrasilAPI)
+- [Vercel](https://vercel.com/)
+
+---
+
+## PRINCÍPIOS DO PROJETO
+
+**Transparência**
+
+Informações devem possuir origem identificável. Resultados não devem ser apresentados sem contexto.
+
+**Precisão**
+
+Dados encontrados, informações não disponíveis e conclusões não verificadas devem ser tratados separadamente.
+
+**Privacidade**
+
+Consultas devem evitar coleta e armazenamento desnecessários de informações pessoais.
+
+**Acessibilidade**
+
+Informações técnicas precisam ser apresentadas de maneira compreensível, sem exigir conhecimento especializado.
+
+**Responsabilidade**
+
+O acesso a dados públicos não significa autorização para abuso, varredura indiscriminada ou utilização incompatível com as condições das fontes.
+
+---
+
+## ROADMAP
+
+A evolução planejada está organizada em etapas:
+
+| Etapa | Objetivo |
+|---|---|
+| 01 | Estruturação e identidade do Lord Consulta |
+| 02 | Integração das consultas brasileiras |
+| 03 | Organização e padronização dos resultados |
+| 04 | Desenvolvimento do Raio-X Empresarial |
+| 05 | Integração com fontes públicas complementares |
+| 06 | Relatórios, histórico e ferramentas de investigação |
+
+O roadmap representa a direção de desenvolvimento, não funcionalidades necessariamente disponíveis na versão atual.
+
+---
+
+## RESPONSABILIDADE SOBRE AS FONTES
+
+O Lord Consulta utiliza como referência uma iniciativa comunitária independente.
+
+A BrasilAPI possui seus próprios mantenedores, colaboradores, infraestrutura e condições de utilização.
+
+Este projeto não representa uma iniciativa oficial da BrasilAPI, Receita Federal, PGFN ou qualquer órgão governamental.
+
+A disponibilidade, atualização, precisão e abrangência dos dados dependem das respectivas fontes.
+
+Consultas devem respeitar os limites de utilização e as condições estabelecidas por cada serviço.
+
+Não são permitidas varreduras automatizadas indiscriminadas ou práticas que comprometam a disponibilidade das APIs utilizadas.
+
+---
+
+## AUTORIA E CRÉDITOS
+
+**Lord Consulta**
+
+Concepção, identidade do produto e desenvolvimento da iniciativa:
+
+**[Junnior (Lord) — @lordjunnior](https://github.com/lordjunnior)**
+
+A infraestrutura e as integrações derivadas da BrasilAPI preservam os créditos de seus autores e colaboradores originais.
+
+Projeto de referência:
+
+[github.com/BrasilAPI/BrasilAPI](https://github.com/BrasilAPI/BrasilAPI)
+
+A atribuição de autoria das partes derivadas deve respeitar a licença e os avisos de copyright presentes no repositório original.
+
+---
+
+### LORD CONSULTA
+
+**Informação acessível é o primeiro passo para decisões melhores.**
+
+[GitHub](https://github.com/lordjunnior/lord-consulta) · [Site](https://lordjunnior.com.br)
